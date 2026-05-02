@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home page</title>
+</head>
+
+<body>
+    <h1>Home Page</h1>
+    <table>
+        <thead>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Price</th>
+        </thead>
+        <tbody id = "product-table">
+            <tr><td colspan="3">Loading...</td></tr>
+        </tbody>
+    </table>
+    <script>
+        const fetchProducts = async () => {
+            try {
+                const res = await fetch("http://127.0.0.1:5000/api/products");
+                const result = await res.json();
+
+                const tbody = document.getElementById("product-table");
+                tbody.innerHTML = "";
+
+                result.data.forEach(p => {
+                    tbody.innerHTML += `
+                    <tr>
+                        <td>${p.id}</td>
+                        <td>${p.name}</td>
+                        <td>$${p.price.toFixed(2)}</td>
+                    </tr>
+                `;
+                });
+
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        fetchProducts();
+    </script>
+</body>
+
+</html>
