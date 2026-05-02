@@ -20,9 +20,10 @@
         </tbody>
     </table>
     <script>
+        import BASE_URL from "./config.js";
         const fetchProducts = async () => {
             try {
-                const res = await fetch("http://127.0.0.1:5000/api/products");
+                const res = await fetch(`${BASE_URL}/products`);
                 const result = await res.json();
 
                 const tbody = document.getElementById("product-table");
