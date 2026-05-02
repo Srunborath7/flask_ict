@@ -19,33 +19,33 @@
             <tr><td colspan="3">Loading...</td></tr>
         </tbody>
     </table>
-    <script type="module">
-        import BASE_URL from "../config.js";
-        const fetchProducts = async () => {
-            try {
-                const res = await fetch(`${BASE_URL}/products`);
-                const result = await res.json();
+<script type="module">
 
-                const tbody = document.getElementById("product-table");
-                tbody.innerHTML = "";
+    const fetchProducts = async () => {
+        try {
+            const res = await fetch(`https://flask-ict-ed4d.onrender.com/api/products`);
+            const result = await res.json();
 
-                result.data.forEach(p => {
-                    tbody.innerHTML += `
+            const tbody = document.getElementById("product-table");
+            tbody.innerHTML = "";
+
+            result.data.forEach(p => {
+                tbody.innerHTML += `
                     <tr>
                         <td>${p.id}</td>
                         <td>${p.name}</td>
                         <td>$${p.price.toFixed(2)}</td>
                     </tr>
                 `;
-                });
+            });
 
-            } catch (error) {
-                console.error(error);
-            }
-        };
+        } catch (error) {
+            console.error("ERROR:", error);
+        }
+    };
 
-        fetchProducts();
-    </script>
+    fetchProducts();
+</script>
 </body>
 
 </html>
